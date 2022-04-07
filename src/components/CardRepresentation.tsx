@@ -9,15 +9,43 @@ import {
   Typography,
 } from "@mui/material";
 import Fade from "@mui/material/Fade";
-import LazyLoad from "react-lazyload";
 import { useHover } from "../utils";
 import { useTheme } from "@mui/material";
 import Image from "next/image";
 import { GetServerSideProps } from "next";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import LazyLoad from "react-lazyload";
 
-function CardRepresentation({ docResource, imgTitle }: any) {
+function CardRepresentation({ docResource, handleClick, imgTitle }: any) {
   const [hover, setHover] = useHover();
+
+  // const handleClick = (key: number, imgValue: string) => {
+  //   console.log(key);
+  //   console.log(imgValue);
+  // };
+
+  const tags = [
+    {
+      id: 1,
+      label: "Baham",
+    },
+    {
+      id: 2,
+      label: "Bamenda",
+    },
+    {
+      id: 3,
+      label: "Bamileke",
+    },
+    {
+      id: 4,
+      label: "Sawa",
+    },
+    {
+      id: 5,
+      label: "Ewondo",
+    },
+  ];
 
   const theme = useTheme();
   const imgLink = `${process.env.NEXT_PUBLIC_PUBLIC_URL}/cover/${imgTitle}`;
@@ -34,7 +62,6 @@ function CardRepresentation({ docResource, imgTitle }: any) {
         }}
         {...setHover}
       >
-        {/* <LazyLoad once={true} height={200} offset={[100, 0]} overflow={true}> */}
         <CardMedia
           component={() => (
             <div>
@@ -54,7 +81,6 @@ function CardRepresentation({ docResource, imgTitle }: any) {
             },
           }}
         />
-        {/* </LazyLoad> */}
         <CardContent
           sx={{
             position: "absolute",
@@ -80,18 +106,17 @@ function CardRepresentation({ docResource, imgTitle }: any) {
             aria-label="small button group"
             sx={{ textTransform: "none" }}
           >
-            <Button
-              onClick={(e) => {
-                console.log(e.currentTarget);
-              }}
-              sx={{ textTransform: "none" }}
-            >
-              Baham
-            </Button>
-            <Button sx={{ textTransform: "none" }}>Bamenda</Button>
-            <Button sx={{ textTransform: "none" }}>Bamileke</Button>
-            <Button sx={{ textTransform: "none" }}>Sawa</Button>
-            <Button sx={{ textTransform: "none" }}>Ewondo</Button>
+            {tags.map((tag) => (
+              <Button
+                onClick={() => {
+                  handleClick(tag.id, imgTitle);
+                }}
+                key={tag.id}
+                sx={{ textTransform: "none" }}
+              >
+                {tag.label}
+              </Button>
+            ))}
           </ButtonGroup>
         </CardContent>
       </Card>
