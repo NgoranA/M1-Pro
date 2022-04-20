@@ -1,13 +1,9 @@
-import React from "react";
 import { Container, Typography, Grid } from "@mui/material";
 import { useTheme } from "@emotion/react";
-import { GetServerSideProps } from "next";
 
 function Welcome() {
-  const theme = useTheme();
-
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" sx={{ mt: 2 }}>
       <Grid container direction="column">
         <Grid item>
           <Typography
@@ -20,22 +16,21 @@ function Welcome() {
           </Typography>
         </Grid>
         <Grid item>
-          <Typography textAlign="center" variant="body1">
-            We are in our research Project and we wish to be able to predict
-            information found in images to useful infomations. we seek your help
-            to classify these images so that we can make use of this to make
-            some amazing data available for you and for our society
+          <Typography textAlign="center" variant="h6" gutterBottom>
+            We are Masters 1 students at the University of Ngoa-Ekele, Yaounde
+            1. We have as project to make our Cameroon culture quickly
+            identified and Learned about through MACHINE LEARNING. To make this
+            a success we need your assistance in order to label these images for
+            us to use and build an Artificially Intelligent machine that will
+            recognize and make our culture known.
+          </Typography>
+          <Typography variant="h6" textAlign="center" color="white">
+            All you have to do is to look at each picture and click a button
+            whose label is connected to the outfit on the picture
           </Typography>
         </Grid>
       </Grid>
     </Container>
   );
 }
-
-export const getSersideProps: GetServerSideProps = async (contect) => {
-  return {
-    props: {},
-  };
-};
-
 export default Welcome;

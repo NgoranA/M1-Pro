@@ -2,7 +2,7 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ["tree.valleyease.me"],
+    domains: ["i.pinimg.com"],
   },
   i18n: {
     locales: ["en-US", "fr"],

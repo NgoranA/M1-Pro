@@ -1,4 +1,5 @@
 import React, { createContext, useContext } from "react";
+import Image from "next/image";
 import {
   AppBar,
   Toolbar,
@@ -7,6 +8,7 @@ import {
   Typography,
   Grid,
   styled,
+  Button,
 } from "@mui/material";
 import { Link } from "./index";
 import { useTheme } from "@mui/material/styles";
@@ -19,6 +21,12 @@ import {
 } from "@mui/icons-material";
 import TranslateIcon from "@mui/icons-material/Translate";
 import { GetServerSideProps, GetStaticProps } from "next";
+import { getProviders, signIn } from "next-auth/react";
+import LoginIcon from "@mui/icons-material/Login";
+import PersonAddAltIcon from "@mui/icons-material/PersonAddAlt";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { signOut } from "next-auth/react";
+import LogoDevIcon from "@mui/icons-material/LogoDev";
 
 function NavBar({ changeColorContext }: any) {
   const theme = useTheme();
@@ -31,7 +39,7 @@ function NavBar({ changeColorContext }: any) {
       <AppBar
         sx={{
           backgroundColor:
-            theme.palette.mode === "dark" ? "#1e1e1e" : "#ffffff",
+            theme.palette.mode === "dark" ? "#1e1e1e" : "#041F4F",
           opacity: 0.85,
           zIndex: theme.zIndex.drawer + 1,
           transition: theme.transitions.create(["width", "margin"], {
@@ -43,20 +51,26 @@ function NavBar({ changeColorContext }: any) {
         enableColorOnDark
       >
         <Toolbar disableGutters variant="dense">
-          <Grid container>
+          <Grid container alignItems="center">
             <Grid item>
-              <IconButton aria-label="Open drawer">
-                <Menu
+              <IconButton
+                LinkComponent={Link}
+                href="/"
+                aria-label="Open drawer"
+              >
+                <LogoDevIcon
+                  fontSize="large"
                   sx={{
                     color:
-                      theme.palette.mode === "light" ? "inherit" : "#ffffff",
+                      theme.palette.mode === "light" ? "#ffffff" : "#ffffff",
                     opacity: 0.85,
                   }}
                 />
               </IconButton>
             </Grid>
             <Grid item>
-              <Typography
+              <Image src="/logo.png" height={30} width={150} />
+              {/* <Typography
                 sx={{
                   color: theme.palette.mode === "light" ? "#1e1e1e" : "#ffffff",
                   opacity: 0.85,
@@ -64,36 +78,25 @@ function NavBar({ changeColorContext }: any) {
                 variant="h5"
               >
                 Our Tag App
-              </Typography>
+              </Typography> */}
             </Grid>
           </Grid>
 
           <Box sx={{ flexGrow: 1 }} />
           <IconButton aria-label="Blog">
-            {/* <Link
-              target="_blank"
-              aria-label="Blog"
-              rel="noopener noreferrer"
-              href={"#"}
-              sx={{
-                textDecoration: "none",
-                color: theme.palette.mode === "dark" ? "#fbfbfb" : "#1e1e1e",
-              }}
-            > */}
             <TranslateIcon
               sx={{
                 textDecoration: "none",
-                color: theme.palette.mode === "dark" ? "#fbfbfb" : "inherit",
+                color: theme.palette.mode === "dark" ? "#fbfbfb" : "#ffffff",
               }}
               fontSize="small"
             />
-            {/* </Link> */}
           </IconButton>
           <IconButton onClick={colorMode.toggleColorMode}>
             {theme.palette.mode === "light" ? (
               <Brightness7
                 sx={{
-                  color: "inherit",
+                  color: "#ffffff",
                 }}
                 fontSize="small"
               />
@@ -106,46 +109,11 @@ function NavBar({ changeColorContext }: any) {
               />
             )}
           </IconButton>
-          <IconButton aria-label="Blog">
-            <Link
-              target="_blank"
-              aria-label="Blog"
-              rel="noopener noreferrer"
-              href={"#"}
-              sx={{
-                textDecoration: "none",
-                color: theme.palette.mode === "dark" ? "#fbfbfb" : "inherit",
-              }}
-            >
-              <InsertLink fontSize="small" />
-            </Link>
-          </IconButton>
-          <IconButton aria-label="Github">
-            <Link
-              sx={{
-                textDecoration: "none",
-                color: theme.palette.mode === "dark" ? "#fbfbfb" : "inherit",
-              }}
-              target="_blank"
-              aria-label="Github"
-              rel="noopener noreferrer"
-              href={"#"}
-            >
-              <GitHubIcon fontSize="small" />
-            </Link>
-          </IconButton>
         </Toolbar>
       </AppBar>
-      <Offset />
+      {/* <Offset /> */}
     </>
   );
 }
 
-export const getStaticProps = async () => {
-  console.log(process.env.MY_NAME);
-
-  return {
-    props: {},
-  };
-};
 export default NavBar;

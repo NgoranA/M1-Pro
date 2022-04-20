@@ -9,6 +9,7 @@
     "lint": "next lint",
     "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"
   },
+  "proxy": "https://web-api-collect.herokuapp.com/",
   "dependencies": {
     "@emotion/cache": "latest",
     "@emotion/react": "latest",
@@ -19,6 +20,7 @@
     "@types/react-lazyload": "^3.2.0",
     "axios": "^0.26.1",
     "next": "latest",
+    "next-auth": "^4.3.1",
     "react": "latest",
     "react-dom": "latest",
     "react-lazyload": "^3.2.0"

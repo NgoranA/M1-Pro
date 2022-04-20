@@ -15,8 +15,9 @@ import Image from "next/image";
 import { GetServerSideProps } from "next";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import LazyLoad from "react-lazyload";
+import axios from "axios";
 
-function CardRepresentation({ docResource, handleClick, imgTitle }: any) {
+function CardRepresentation({ handleClick, id, link, my_tags }: any) {
   const [hover, setHover] = useHover();
 
   // const handleClick = (key: number, imgValue: string) => {
@@ -24,31 +25,7 @@ function CardRepresentation({ docResource, handleClick, imgTitle }: any) {
   //   console.log(imgValue);
   // };
 
-  const tags = [
-    {
-      id: 1,
-      label: "Baham",
-    },
-    {
-      id: 2,
-      label: "Bamenda",
-    },
-    {
-      id: 3,
-      label: "Bamileke",
-    },
-    {
-      id: 4,
-      label: "Sawa",
-    },
-    {
-      id: 5,
-      label: "Ewondo",
-    },
-  ];
-
   const theme = useTheme();
-  const imgLink = `${process.env.NEXT_PUBLIC_PUBLIC_URL}/cover/${imgTitle}`;
   return (
     <>
       <Card
@@ -67,8 +44,8 @@ function CardRepresentation({ docResource, handleClick, imgTitle }: any) {
             <div>
               <Image
                 priority
-                src={imgLink}
-                height={130}
+                src={link}
+                height={120}
                 width={100}
                 layout="responsive"
               />
@@ -106,15 +83,15 @@ function CardRepresentation({ docResource, handleClick, imgTitle }: any) {
             aria-label="small button group"
             sx={{ textTransform: "none" }}
           >
-            {tags.map((tag) => (
+            {my_tags.map((tag: any) => (
               <Button
                 onClick={() => {
-                  handleClick(tag.id, imgTitle);
+                  handleClick(tag.id, id);
                 }}
                 key={tag.id}
                 sx={{ textTransform: "none" }}
               >
-                {tag.label}
+                {tag.name}
               </Button>
             ))}
           </ButtonGroup>

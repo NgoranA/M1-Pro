@@ -4,7 +4,7 @@ import { useState, useCallback, useEffect } from "react";
  * custom hooks
  * @url https://reactjs.org/docs/hooks-custom.html
  */
-export const useTitle = (title = "Valley") => {
+export const useTitle = (title = "Tagger") => {
   useEffect(() => {
     document.title = title;
   }, [title]);
